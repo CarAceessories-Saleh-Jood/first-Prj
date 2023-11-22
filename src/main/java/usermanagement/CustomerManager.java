@@ -102,6 +102,8 @@ public class CustomerManager {
         }
     }
 
+    
+    
     private class Order {
         private Product product;
         private int quantity;

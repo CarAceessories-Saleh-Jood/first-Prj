@@ -24,7 +24,7 @@ public class ManageProductsT {
 	public ManageProductsT() {
 	this.obj=new LoginSignUp();
 	this.obj1=new ProductsManager();
-	productList=obj1.getProductList();
+	productList=(ArrayList<Product>) obj1.getProductList();
 	
 	}
 	

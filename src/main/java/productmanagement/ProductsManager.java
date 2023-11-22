@@ -63,12 +63,12 @@ public class ProductsManager {
     public void listProducts() {
     	 PrintUtils.println("-----------------------------------------------------");
     	for (Product product : productList) {
-            System.out.println("Product Name: " + product.getName());
-            System.out.println("Product Description: " + product.getDescription());
-            System.out.println("Product Cost: " + product.getCost());
-            System.out.println("Product Quantity: " + product.getQuantity());
-            System.out.println("Product Availability: " + (product.isAvailable()?"in stock":"out of stock"));
-            System.out.println("Product Category: " + product.getCategory());
+    		 PrintUtils.println("Product Category: " + product.getCategory());
+    		 PrintUtils.println("Product Name: " + product.getName());
+    		 PrintUtils.println("Product Description: " + product.getDescription());
+    		 PrintUtils.println("Product Cost: " + product.getCost());
+    		 PrintUtils.println("Product Quantity: " + product.getQuantity());
+    		 PrintUtils.println("Product Availability: " + (product.isAvailable()?"in stock":"out of stock"));
             System.out.println();
         }
     	 PrintUtils.println("-----------------------------------------------------");
