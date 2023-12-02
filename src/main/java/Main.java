@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,31 +13,40 @@ import usermanagement.SignUp;
 import usermanagement.Users;
 
 public class Main {
-	private static int Type;
+	
 	private static String Email;
 	private static final String ENTER_EMAIL = "Enter your email: ";
 	private static final String ENTER_PASS = "Enter your password: ";
+	private static final String THANK_MSG = "Thank you for using our system. Goodbye!";
+	private static final String NOT_AVAILABLE = "The choice is not valid";
 	private static List<Users> userList = new ArrayList<>();
 	
 	public static void setlist(List<Users> userList) {
 	Main.userList=userList;	
 	}
 	
+	
+	
     public static void  printLoginInfo() {
-     Scanner scan = new Scanner(System.in);	  
-     LoginLogout log = new LoginLogout();
-     while (true) {
-     PrintUtils.println(ENTER_EMAIL);
-     String email = scan.nextLine();
-     PrintUtils.println(ENTER_PASS);
-     String password = scan.nextLine();
-     if (log.login(email, password, userList)) {
-     PrintUtils.println("Login succeeded");
-     break; 
-     }
-     else 
-     log.printInvalid();
-       }
+    	Scanner scan = new Scanner(System.in);	
+		LoginLogout log = new LoginLogout();
+		 while (true) {
+		 PrintUtils.println(ENTER_EMAIL);
+		 String email = scan.nextLine();
+		 PrintUtils.println(ENTER_PASS);
+		 String password = scan.nextLine();
+		 if (log.login(email, password, userList)) {
+		 PrintUtils.println("Login succeeded");
+		 Email=email;
+		 break; 
+		 }
+		 else 
+		 {
+		 log.printInvalid();
+		 }
+		 
+		 }
+	
      }
 	
    public static void printSignUpInfo() {
@@ -76,16 +86,18 @@ public class Main {
     
     
 	public static void main(String[] args) {
+     int Type;
 	 PrintUtils.println("------* Welcome to our Car Accessories system *------");
-     boolean exit = false;
-	 Scanner scan = new Scanner(System.in);	
-	 List<Users> userList = new ArrayList<>();
+     Scanner scan = new Scanner(System.in);	
+	 List<Users> userList;
 	 
-	 while (!exit) {
-	 Printlists.userRolelist();	  
+	 while (true) {
+	 try {	 
+	 Printlists.userRolelist();
+	 
 	 Type = scan.nextInt();	 
 	 
-     if(Type==1){ ///admin
+     if(Type==1){                 ///admin
     	Printlists.printLogin(); //Login or Exit
     	int num=scan.nextInt();
     	if(num==1) { //LOGIN
@@ -95,13 +107,14 @@ public class Main {
     	Admin.adminTasks();
     	}
     	else if(num==2) {
-    	 PrintUtils.println("Thank you for using our system. Goodbye!");
+    	 
+    	 PrintUtils.println(THANK_MSG);
          System.exit(1);	
     	}
     	else {
-    	PrintUtils.println("The choice is not valid");
-        continue;	
-    	}
+    	PrintUtils.println(NOT_AVAILABLE);
+    
+       }
     }
      
      if(Type==2){ //Installer
@@ -111,14 +124,16 @@ public class Main {
      userList =Installer.getList();
      setlist(userList);
      printLoginInfo();
+     Installer.setCurrent(Email);
+     Installer.installerTasks();
      }
      else if(num==2) {
-     PrintUtils.println("Thank you for using our system. Goodbye!");
+     PrintUtils.println(THANK_MSG);
      System.exit(1);	
     	}
      else {
-     PrintUtils.println("The choice is not valid");
-     continue; 
+     PrintUtils.println(NOT_AVAILABLE);
+     
      }
      }
      
@@ -129,35 +144,44 @@ public class Main {
      Printlists.printLoginorsignup();
      int num=scan.nextInt();
      if(num==1) {
-     printSignUpInfo();	 
+     printSignUpInfo();	
+     Customer.setCurrent(Email);
+     Customer.customerServices();
      }
      else if(num==2) {
-    printLoginInfo();	 
+     printLoginInfo();
+     Customer.setCurrent(Email);
+     Customer.customerServices();
      }
      else if(num==3) {
-     PrintUtils.println("Thank you for using our system. Goodbye!");
+     PrintUtils.println(THANK_MSG);
      System.exit(1);	 
      }
      else {
-     PrintUtils.println("The choice is not valid");
-     continue;	 
+     PrintUtils.println(NOT_AVAILABLE);
+ 
      }
      }
      
      
      
      if(Type==4){
-         exit=true;
-         PrintUtils.println("Thank you for using our system. Goodbye!");
+         PrintUtils.println(THANK_MSG);
          System.exit(1);
      }
      if (Type!=1 && Type!=2 && Type!=3 &&Type!=4) {
-  	   PrintUtils.println("The choice is not valid");
-         continue;
+  	   PrintUtils.println(NOT_AVAILABLE);
+        
      }
      
-    }//While loop ends here
+	 }
 	
-  }//main function ends here	
-	
+	 
+	 catch (InputMismatchException e) {
+         PrintUtils.println("Invalid input. Please enter a valid integer.");
+         scan.nextLine(); // Consume the invalid input
+       }
+	 
+         }//While loop ends here
+	}//main function ends here	
 }

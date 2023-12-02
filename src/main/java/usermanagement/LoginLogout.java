@@ -10,7 +10,7 @@ public LoginLogout() {
 	
 }
 
-public boolean login(String Email, String password, List<Users> userList) {
+   public boolean login(String Email, String password, List<Users> userList) {
 	   for (Users i : userList) {
 	   if (i.getEmail().equalsIgnoreCase(Email)&& i.getPassword().equals(password)){
 		
@@ -18,22 +18,21 @@ public boolean login(String Email, String password, List<Users> userList) {
 	    }
 		}
 	     return isLogged;
-}
+      }
 
-public boolean getIsLogged() {
-    return this.isLogged;
-}
-
-public void logout() {
+  public void logout() {
   this.isLogged=false;
-}
+  }
 
-public  void setIsLogged(boolean islogged) {
+  public void setIsLogged(boolean islogged) {
 	this.isLogged=islogged;   
-}
+  }
 
-public  void printInvalid() {
- System.out.println("Invalid email or password");
-}
+  public void printInvalid() {
+  System.out.println("Invalid email or password");
+  }
 
+  public boolean getIsLogged() {
+    return this.isLogged;
+ }
 }

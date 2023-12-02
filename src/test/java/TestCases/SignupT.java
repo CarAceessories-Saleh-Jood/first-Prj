@@ -20,8 +20,8 @@ public class SignupT {
 	private List<Users> userList;
 	
 	public SignupT() {
-	this.customer=new Customer();	
-	this.userList = customer.getList();
+	//this.customer=new Customer();	
+	this.userList = Customer.getList();
 	this.obj=new SignUp(userList);
 	}
 	@Given("that the customer is not signed up")

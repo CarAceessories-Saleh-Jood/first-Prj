@@ -7,37 +7,30 @@ import java.util.Scanner;
 import productmanagement.CategoriesManager;
 import productmanagement.Category;
 import productmanagement.ProductsManager;
+import requestsmanagement.AppointmentBooking;
 import userinterface.PrintUtils;
 import userinterface.Printlists;
 
 public class Admin{
 	static Scanner scanner = new Scanner(System.in);	
-	   
 	private static List<Users> adminList = new ArrayList<>();
 	static {
-    adminList.add(new Users("jood.hamdallah12@gmail.com","Jood","1234","0565584756","Tulkarm"));
-	adminList.add(new Users("sawalha.saleh3@gmail.com","Saleh", "1234","0565785656","Nablus"));
+    adminList.add(new Users("jood.hamdallah12@gmail.com","Jood Hamdallah","1234","0565584756","Tulkarm"));
+	adminList.add(new Users("sawalha.saleh3@gmail.com","Saleh Sawalha", "1234","0565785656","Nablus"));
 	}
 		
     public Admin() {}
     
     public static void adminTasks() {
+    	
         while(true) {
-       //Printlists.adminTasks();	
-   PrintUtils.println("----Admin Dashboard----");
-   PrintUtils.println("1-Manage product categories (add, edit, delete)");
-   PrintUtils.println("2-Add and update product listings");
-   PrintUtils.println("3-View and manage accounts.");
-   PrintUtils.println("4-Schedule and manage installation appointments.");
-   PrintUtils.println("5-Logout");
-		
-	int choice = scanner.nextInt();
+    Printlists.adminTasks();	
+   	int choice = scanner.nextInt();
     if(choice==5) {
     LoginLogout log=new LoginLogout();	
     log.logout();	
     PrintUtils.println("Logged out successfully");	
     break;	
-    	
     }
 	switch(choice) {
     case 1:
@@ -50,19 +43,20 @@ public class Admin{
 	manageAccounts();	
 	break;
 	case 4:
-		
+	printAppointments();	
 	break;
-	
 	default:
 	PrintUtils.println("The choice is not valid");	
 	break;
 	
 	  }//switch ends here
  	
-   } 
+   } //while
 }
     
-    public static void manageCategories() {
+    
+
+	public static void manageCategories() {
     CategoriesManager category = new CategoriesManager();
     Scanner scanner = new Scanner(System.in);	
     
@@ -82,6 +76,7 @@ public class Admin{
         category.addCategory(name, description);
         break;
     case 2:
+    	category.listCategories();
         PrintUtils.println("Enter the category name to edit: ");
         String categoryName = scanner.nextLine();
         PrintUtils.println("Enter the new category name: ");
@@ -157,9 +152,15 @@ public class Admin{
               System.out.println("Product added to the list.");}
              break;
              case 2:
+              prod.listProducts(); 
               PrintUtils.println("Enter the product name that you want to make edits on: ");
               String productName = scanner.nextLine();
-               Printlists.EditProduct();
+              while(prod.checkexsist(productName)) {
+              PrintUtils.println("This product doesn't exsist in the the company's products, enter the name again ");
+              productName = scanner.nextLine();
+              }
+              
+               Printlists.editProduct();
                int choice1 = scanner.nextInt();
                scanner.nextLine(); 
                
@@ -176,7 +177,13 @@ public class Admin{
                break; 	
                case 3:
                PrintUtils.println("Enter the new product cost: ");
-               double newCost = scanner.nextDouble();	
+               double newCost = scanner.nextDouble();
+               while(!prod.checkCost(newCost)) {
+                   System.out.print("Cost cannot be zero or negative!");
+                   System.out.print("Enter the product cost: ");
+                   newCost = scanner.nextDouble();
+               }
+               
                prod.updateProductCost(productName, newCost);
                break; 
                case 4:
@@ -186,7 +193,6 @@ public class Admin{
                break; 
                case 5:
                category.listCategories();	
-               
                PrintUtils.println("Enter the (number) of category that you want to move the product to it: ");
                int cat=scanner.nextInt();
                ArrayList<Category> categoriesList1 = category.getCategoriesList();
@@ -269,6 +275,12 @@ public class Admin{
       }//while loop
     
    }
+    public static void printAppointments() {
+    for (AppointmentBooking app : Customer.getBookingList()) {	
+    PrintUtils.println("\nAppointment number: "+ app.getAppointment().getAppointmentNumber()+"\nInstaller Name: "+ app.getAppointment().getName()+ "\nInstaller email: "+ app.getAppointment().getEmail()+"\nCustomer Name: "+ app.getName()+"\nAppointment date: "+app.getAppointment().getDate()+"\nAppointment day: "+app.getAppointment().getDay()+"\nCar Brand : "+app.getCarBrand()+"\nCar Model : "+app.getCarModel()+"\nReason of request : "+app.getReason()+"\n");	
+    }
+}
+    
     
     public static List<Users> getList(){
 	       return adminList;

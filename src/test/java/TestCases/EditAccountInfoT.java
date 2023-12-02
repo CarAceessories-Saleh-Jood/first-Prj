@@ -4,17 +4,23 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import org.junit.Before;
+
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import usermanagement.Customer;
 import usermanagement.LoginLogout;
 import usermanagement.Users;
 
+//@Before
 public class EditAccountInfoT {
 	private String email,name,password,phonenumber,address,newpass,newname,newphone,newaddress;
     LoginLogout obj;
     Customer obj2;
     List<Users> usersList;
+    
+    
     
     public EditAccountInfoT() {
     this.obj=new LoginLogout();

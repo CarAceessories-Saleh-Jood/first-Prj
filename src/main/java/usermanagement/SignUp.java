@@ -1,6 +1,5 @@
 package usermanagement;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,8 +29,7 @@ public class SignUp {
 		return true; 
     }
 	
-  public boolean emailFormat(String email) {
-		
+    public boolean emailFormat(String email) {
 		Matcher matcher = EMAIL_PATTERN.matcher(email);
 		return  matcher.matches();
 	}

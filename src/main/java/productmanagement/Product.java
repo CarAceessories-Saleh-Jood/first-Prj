@@ -1,10 +1,5 @@
 package productmanagement;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import usermanagement.Users;
-
 public class Product{
 
     private String name;
@@ -26,9 +21,7 @@ public class Product{
     	
     }
     
-	
-
-    public String getName() {
+	 public String getName() {
         return this.name;
     }
 

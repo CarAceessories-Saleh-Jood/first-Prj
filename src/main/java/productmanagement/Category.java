@@ -1,7 +1,4 @@
 package productmanagement;
-import java.util.ArrayList;
-import java.util.Scanner;
-import userinterface.PrintUtils;
 
 public class Category {
 

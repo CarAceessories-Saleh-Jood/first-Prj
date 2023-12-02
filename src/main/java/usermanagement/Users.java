@@ -9,9 +9,9 @@ public class Users {
 	
 	 
 
-     public Users() {
+       public Users() {
    	  
-     }
+      }
       	 
       public  Users (String email,String name, String password, String phonenumber,String address) {
        this.email = email;
@@ -38,12 +38,7 @@ public class Users {
        public String getName() {
            return this.name;
        }
-       /*
-       public String gettype() {
-           return this.type;
-       }
-     */
-
+     
        public void setUseremail(String email) {
            this.email = email;
        }
@@ -62,9 +57,5 @@ public class Users {
        public void setAddress(String address) {
            this.address = address;
        }
-       /*
-       public void setType(String type) {
-           this.type = type;
-       }
-	 */
+      
 }

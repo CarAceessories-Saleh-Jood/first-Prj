@@ -9,19 +9,21 @@ import userinterface.PrintUtils;
 public class ProductsManager {
 
 	private static ArrayList<Product> productList = new ArrayList<>();
+	private static final String WRONG_INPUT="Wrong input";
     private boolean exsist=true;
     private boolean added=false;
 	
     static {
 	  	
-    	Product prod1 = new Product("Head lights","High-quality headlights designed to provide optimal illumination for your vehicle. ",300,20,"Lightings");
-    	Product prod2 = new Product("Speaker","Engineered with precision, this speaker is designed to seamlessly integrate into various car models, ensuring a versatile enhancement to your in-car audio.",70,10,"Audio");
-    	Product prod3 = new Product("Battery", " A high-performance car battery designed to provide reliable  and efficient power to your vehicle's electrical system.",450,0,"Electronics");
-    	Product prod4 = new Product("Tail lights","High-quality  ",30,20,"Lightings");
-    	productList.add(prod1);
-        productList.add(prod2);
-    	productList.add(prod3);
-    	productList.add(prod4);
+    	productList.add(new Product("Head lights","High-quality headlights designed to provide optimal illumination for your vehicle. ",300,20,"Lightings"));
+        productList.add(new Product("Speaker","Engineered with precision, this speaker is designed to seamlessly integrate into various car models, ensuring a versatile enhancement to your in-car audio.",70,10,"Audio"));
+    	productList.add(new Product("Battery", "A high-performance car battery designed to provide reliable  and efficient power to your vehicle's electrical system.",450,0,"Electronics"));
+    	productList.add(new Product("Tail lights","High-quality tail lights to enhance visibility and safety for your vehicle. ",150,20,"Lightings"));
+    	productList.add(new Product("Floor Mats","Premium floor mats for added comfort and protection, elevating the interior aesthetics of your space.",299.9,20,"Interior"));
+    	productList.add(new Product("Front Brake Kit","Upgrade your vehicle's braking efficiency with this quality front brake kit, ensuring a safer driving experience.",124.35,50,"Brakes"));
+    	productList.add(new Product("Touchscreen Display","Elevate your vehicle's interior with a high-quality touchscreen display for a modern audiovisual experience.",499.99,100,"Audio"));
+    	productList.add(new Product("Pneumatic Fluid Evacuator","Efficient pneumatic fluid evacuator, designed for quick and hassle-free automotive maintenance.",204.74,5,"Automative Tools"));
+    	productList.add(new Product("Pedal pad set","High-quality pedal pad set, enhancing both the driving experience and aesthetic appeal.",94.05,80,"Interior"));
     	
     }
     
@@ -48,7 +50,7 @@ public class ProductsManager {
     public boolean checkexsist(String name) {
     	
         for (Product i : productList) {
-       if (i.getName().equals(name)) {
+       if (i.getName().equalsIgnoreCase(name)) {
        	
     	  return false;
        }
@@ -67,7 +69,7 @@ public class ProductsManager {
     	for (Product product : productList) {
             System.out.println("Product Name: " + product.getName());
             System.out.println("Product Description: " + product.getDescription());
-            System.out.println("Product Cost: " + product.getCost());
+            System.out.println("Product Cost: " + product.getCost()+"$");
             System.out.println("Product Quantity: " + product.getQuantity());
             System.out.println("Product Availability: " +(product.isAvailable()?"In stock":"Out of stock"));
             System.out.println("Product Category: " + product.getCategory());
@@ -85,7 +87,7 @@ public class ProductsManager {
             return;
            }
        }
-       PrintUtils.println("Wrong input");
+       PrintUtils.println(WRONG_INPUT);
        
    }
   
@@ -98,7 +100,7 @@ public class ProductsManager {
             return;
            }
        }
-       PrintUtils.println("Wrong input");
+       PrintUtils.println(WRONG_INPUT);
        
    }
    public void updateProductCost(String productName, double newCost) {
@@ -110,19 +112,20 @@ public class ProductsManager {
             return;
            }
        }
-       PrintUtils.println("Wrong input");
+       PrintUtils.println(WRONG_INPUT);
        
    }
   public void updateProductQuantity(String productName, int newQuantity) {
 	   for (Product i : productList) {
-           if (i.getName().equals(productName)) {
+           if (i.getName().equalsIgnoreCase(productName)) {
+        	
         	i.setQuantity(newQuantity);
               
             PrintUtils.println("Product quantity Updated successfully");
             return;
            }
        }
-       PrintUtils.println("Wrong input");
+       PrintUtils.println(WRONG_INPUT);
        
    }  
   
@@ -135,7 +138,7 @@ public class ProductsManager {
            return;
           }
       }
-      PrintUtils.println("Wrong input");
+      PrintUtils.println(WRONG_INPUT);
       
   }
   
@@ -145,7 +148,7 @@ public class ProductsManager {
 	    while (productIterator.hasNext()) {
 	        Product prod = productIterator.next();
 	        if (prod.getName().equalsIgnoreCase(name)) {
-	        	productIterator.remove();  // Use iterator's remove method to avoid ConcurrentModificationException
+	        	productIterator.remove();  
 	            PrintUtils.println("Product deleted successfully.");
 	            found = true;
 	            return;
@@ -156,4 +159,12 @@ public class ProductsManager {
 	     }
      }
   
+  public Product getProduct(String productName) {
+	  for (Product product : productList) {
+          if (product.getName().equalsIgnoreCase(productName)) {
+              return product;
+          }
+      }
+      return null; // Product not found  
+  }
 }

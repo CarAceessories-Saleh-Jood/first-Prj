@@ -14,17 +14,14 @@ public class CategoriesManager {
  private static ArrayList<Category> categoryList= new ArrayList<>();	
 
  static {
-	   Category cat1=new Category("Interior", "Category for interior products");
-	   Category cat2=new Category("Lightings", "Category for lightings products");
-	   Category cat3=new Category("Audio", "Category for audio products");
-	   Category cat4=new Category("Electronics", "Category for electronics products");
-	   Category cat5=new Category("Body parts", "Category for electronics products");
-	   
-	    categoryList.add(cat1);
-	    categoryList.add(cat2);
-	    categoryList.add(cat3);
-	    categoryList.add(cat5);
-	    
+	  
+        categoryList.add(new Category("Interior", "Decor and functional items for spaces."));
+	    categoryList.add(new Category("Lightings", "Various lighting solutions."));
+	    categoryList.add(new Category("Audio", "Sound products and accessories."));
+	    categoryList.add(new Category("Electronics", " Diverse electronic devices."));
+	    categoryList.add(new Category("Body parts", "External vehicle components."));
+	    categoryList.add(new Category("Brakes", "Products for vehicle braking."));
+	    categoryList.add(new Category("Automative Tools", "Tools for automotive tasks."));
  }
 	
  public CategoriesManager() {}
@@ -93,7 +90,8 @@ public class CategoriesManager {
 	    	                                    " | \u001B[31mDescription:\u001B[0m " + category.getDescription();  // Red color
 	    	        PrintUtils.println(nameAndDescription);
 	    	        PrintUtils.println();
-	    	    } 
+	    	    }
+	    	 PrintUtils.println("-----------------------------------------------------");	    
 	    }
 	   
 }
