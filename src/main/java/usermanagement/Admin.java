@@ -19,7 +19,7 @@ public class Admin{
 	adminList.add(new Users("sawalha.saleh3@gmail.com","Saleh Sawalha", "1234","0565785656","Nablus"));
 	}
 		
-    public Admin() {}
+    private Admin() {}
     
     public static void adminTasks() {
     	
@@ -114,42 +114,42 @@ public class Admin{
           
           switch (choice) {
           case 1:
-       	   System.out.print("Enter the product name: ");
+        	  PrintUtils.println("Enter the product name: ");
               String name = scanner.nextLine();
               while(!prod.checkexsist(name)) {
-        	    System.out.println("This product is already in the list");
-               System.out.println("Enter the product name: ");
+            	  PrintUtils.println("This product is already in the list");
+            	  PrintUtils.println("Enter the product name: ");
                name = scanner.nextLine();
              }
-              System.out.print("Enter the product description: ");
+              PrintUtils.println("Enter the product description: ");
               String description = scanner.nextLine();
-              System.out.print("Enter the product cost: ");
+              PrintUtils.println("Enter the product cost: ");
               double cost = scanner.nextDouble();
               while(!prod.checkCost(cost)) {
-                  System.out.print("Cost cannot be zero or negative!");
-                  System.out.print("Enter the product cost: ");
+            	  PrintUtils.println("Cost cannot be zero or negative!");
+            	  PrintUtils.println("Enter the product cost: ");
                   cost = scanner.nextDouble();
               }
-              System.out.print("Enter the product quantity: ");
+              PrintUtils.println("Enter the product quantity: ");
               int quantity = scanner.nextInt();
               
-              ArrayList<Category> categoriesList = category.getCategoriesList();
-              System.out.println("Available Categories:");
+              List<Category> categoriesList = category.getCategoriesList();
+              PrintUtils.println("Available Categories:");
               for (int i = 0; i < categoriesList.size(); i++) {
-                  System.out.println((i + 1) + ". " + categoriesList.get(i).getName());
+            	  PrintUtils.println((i + 1) + ". " + categoriesList.get(i).getName());
               }
 
               int categoryChoice;
               do {
-                  System.out.print("Choose a category (enter the number): ");
+            	  PrintUtils.println("Choose a category (enter the number): ");
                   categoryChoice = scanner.nextInt();
               } while (categoryChoice < 1 || categoryChoice > categoriesList.size());
 
               // Get the selected category name
               String selectedCategory = categoriesList.get(categoryChoice - 1).getName();
               
-              prod.addProduct(name,description,cost,quantity,selectedCategory);{
-              System.out.println("Product added to the list.");}
+              prod.addProduct(name,description,cost,quantity,selectedCategory);
+              PrintUtils.println("Product added to the list.");
              break;
              case 2:
               prod.listProducts(); 
@@ -179,8 +179,8 @@ public class Admin{
                PrintUtils.println("Enter the new product cost: ");
                double newCost = scanner.nextDouble();
                while(!prod.checkCost(newCost)) {
-                   System.out.print("Cost cannot be zero or negative!");
-                   System.out.print("Enter the product cost: ");
+            	   PrintUtils.println("Cost cannot be zero or negative!");
+            	   PrintUtils.println("Enter the product cost: ");
                    newCost = scanner.nextDouble();
                }
                
@@ -195,10 +195,11 @@ public class Admin{
                category.listCategories();	
                PrintUtils.println("Enter the (number) of category that you want to move the product to it: ");
                int cat=scanner.nextInt();
-               ArrayList<Category> categoriesList1 = category.getCategoriesList();
+              List<Category> categoriesList1 = category.getCategoriesList();
                String newCategory = categoriesList1.get(cat - 1).getName();
                prod.updateProductCategory(productName, newCategory);
                break; 
+               default:
                }
                
               break;

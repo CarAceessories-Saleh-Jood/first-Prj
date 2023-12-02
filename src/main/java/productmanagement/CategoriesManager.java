@@ -26,7 +26,7 @@ public class CategoriesManager {
 	
  public CategoriesManager() {}
  
- public  ArrayList<Category> getCategoriesList() {
+ public  List<Category> getCategoriesList() {
      return categoryList;
  }
 
@@ -51,7 +51,7 @@ public class CategoriesManager {
 	
 	 public void deleteCategory(String name) {
        ProductsManager product=new ProductsManager();
-	   ArrayList<Product> prodList = product.getProductList();
+	   List<Product> prodList = product.getProductList();
 	   boolean found=false;
 	   
 	   

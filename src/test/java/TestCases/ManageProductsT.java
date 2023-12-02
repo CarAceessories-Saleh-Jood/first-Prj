@@ -4,6 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -18,7 +19,7 @@ public class ManageProductsT {
 	private double cost,newCost,delta=0.0001;
 	private int quantity,newQuantity;
 	
-	private ArrayList<Product> productList;
+	private List<Product> productList;
 	
 	public ManageProductsT() {
 	this.obj=new LoginLogout();

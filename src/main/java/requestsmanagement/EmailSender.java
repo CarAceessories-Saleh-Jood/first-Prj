@@ -4,9 +4,16 @@ package requestsmanagement;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import userinterface.PrintUtils;
+
 import java.util.Properties;
 
 public class EmailSender {
+	
+	      private EmailSender() {
+	    	  
+	      }
 	        public static void sendEmail(String to, String subject, String body) {
 	        final String username = "gameboxjsd2023@gmail.com"; // replace with your email
 	        final String password = "pidj svlq nxel nohb"; // replace with your email password
@@ -34,7 +41,7 @@ public class EmailSender {
 
 	            Transport.send(message);
 
-	            System.out.println("Email confirmation sent successfully!");
+	            PrintUtils.println("Email confirmation sent successfully!");
 
 	        } catch (MessagingException e) {
 	            throw new RuntimeException(e);

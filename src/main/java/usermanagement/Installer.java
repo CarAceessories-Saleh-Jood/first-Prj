@@ -3,21 +3,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
-import java.net.PasswordAuthentication;
-import java.util.ArrayList;
-import java.util.Scanner;
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
 import requestsmanagement.Appointment;
 import requestsmanagement.AppointmentBooking;
 
-import java.util.Properties;
 import userinterface.PrintUtils;
 import userinterface.Printlists;
 
@@ -119,13 +107,13 @@ public class Installer {
 	public static void newAppointment(String currentEmail2) {
 		  Scanner scanner = new Scanner(System.in);
 		  String installerName="";
-		  System.out.print("Enter your name ");
+		  PrintUtils.println("Enter your name ");
           String name = scanner.nextLine();
-		  System.out.print("Enter date (e.g., 01-12-2023): ");
+          PrintUtils.println("Enter date (e.g., 01-12-2023): ");
           String date = scanner.nextLine();
-          System.out.print("Enter day (e.g., Monday): ");
+          PrintUtils.println("Enter day (e.g., Monday): ");
           String day = scanner.nextLine();
-          System.out.print("Enter hour (e.g., 09:00 AM): ");
+          PrintUtils.println("Enter hour (e.g., 09:00 AM): ");
           String hour = scanner.nextLine();
           
            addAppointemnt(date,day,hour,currentEmail2, name);
@@ -144,7 +132,7 @@ public class Installer {
             for (Appointment appointment : appointmentList) {
             	if(appointment.getEmail().equalsIgnoreCase(installerEmail)) {
             	found=true;	
-                System.out.println(appointment);
+            	 PrintUtils.println(appointment);
             	}
             }
         if(!found){
@@ -170,20 +158,20 @@ public class Installer {
 	 }
 	  
 	 public void deleteAccount(String email) {
-	 boolean found=false;
+	
 	 Iterator<Users> listIterator = installerList.iterator();
 	 while (listIterator.hasNext()) {
 	 Users installer = listIterator.next();
 	 if (installer.getEmail().equalsIgnoreCase(email)) {
 	 listIterator.remove();  // Use iterator's remove method to avoid ConcurrentModificationException
 	 PrintUtils.println("Installer deleted successfully.");
-	 found = true;
+	
 	  return;
 	       }
 	  }
-	 if(!found) {
+	 
 	   PrintUtils.println("Installer email cannot be found"); 
-	   }	
+	   	
 	}
 	 
 		public static void printAccounts() {
@@ -191,12 +179,12 @@ public class Installer {
 			PrintUtils.println("\nInstallers List");
 			for (Users i : installerList) {
 				
-				System.out.println("Installer Email: " + i.getEmail());
-		        System.out.println("Installer Name: " + i.getName());
-		        System.out.println("Installer Phone number: " + i.getPhoneNumber());
-		        System.out.println("Installer Address: " + i.getAddress());
-		        System.out.println();
-		        System.out.println("*******");
+				 PrintUtils.println("Installer Email: " + i.getEmail());
+				 PrintUtils.println("Installer Name: " + i.getName());
+				 PrintUtils.println("Installer Phone number: " + i.getPhoneNumber());
+				 PrintUtils.println("Installer Address: " + i.getAddress());
+				 PrintUtils.println();
+				 PrintUtils.println("*******");
 			}
 			PrintUtils.println("-----------------------------------------------------");
 			}

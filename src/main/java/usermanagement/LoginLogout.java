@@ -2,6 +2,8 @@ package usermanagement;
 
 import java.util.List;
 
+import userinterface.PrintUtils;
+
 public class LoginLogout {
 	
 private boolean isLogged=false;
@@ -29,7 +31,7 @@ public LoginLogout() {
   }
 
   public void printInvalid() {
-  System.out.println("Invalid email or password");
+	  PrintUtils.println("Invalid email or password");
   }
 
   public boolean getIsLogged() {

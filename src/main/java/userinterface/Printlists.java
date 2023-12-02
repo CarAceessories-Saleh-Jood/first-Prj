@@ -2,6 +2,9 @@ package userinterface;
 
 public class Printlists {
 	
+	private Printlists() {
+		
+	}
 	
 	public static void userRolelist() {
 	   PrintUtils.println("-> Choose how you want to get into the system:");

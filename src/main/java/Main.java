@@ -3,14 +3,9 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import userinterface.PrintUtils;
-import userinterface.Printlists;
-import usermanagement.Admin;
-import usermanagement.Customer;
-import usermanagement.Installer;
-import usermanagement.LoginLogout;
-import usermanagement.SignUp;
-import usermanagement.Users;
+import userinterface.*;
+import usermanagement.*;
+
 
 public class Main {
 	

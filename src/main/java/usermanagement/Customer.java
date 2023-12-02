@@ -8,17 +8,14 @@ import java.util.Scanner;
 
 import productmanagement.Product;
 import productmanagement.ProductsManager;
-import requestsmanagement.EmailSender;
-import requestsmanagement.Order;
-import requestsmanagement.OrderHistory;
-import requestsmanagement.Appointment;
-import requestsmanagement.AppointmentBooking;
-import userinterface.PrintUtils;
-import userinterface.Printlists;
+import requestsmanagement.*;
+import userinterface.*;
 
 
 public class Customer {
-	
+private static final String QUESTION="Do you want to buy anything? (enter yes/no)";
+private static final String WRONG="Wrong input";
+
  private static String currentEmail;	
  private static List<Users> customerList = new ArrayList<>();
  private static List<Order> customerCart=new ArrayList<>();
@@ -28,19 +25,13 @@ public class Customer {
  
  
 	 static {
-		    Users customer0 = new Users("sawalha.saleh73@gmail.com","Jood","1234","0565589736","Ramallah");
-		    Users customer =  new Users("surahamdallah@gmail.com","Sura","1234","0565589736","Ramallah");
-			Users customer1 = new Users("baraahamdallah@gmail.com","Baraa","1234","0565589786","Jenin");
-			Users customer2 = new Users("nabeel@gmail.com","Nabeel", "1234","0565785713","Tulkarm");
-			Users customer3 = new Users("aya@gmail.com","Aya","1234","0565589786","Ramallah");
-			Users customer4 = new Users("mohammadhamdallah@gmail.com","Mohammad", "1234","0565785713","Tulkarm");
-			
-			customerList.add(customer0);
-			customerList.add(customer);
-			customerList.add(customer1);
-			customerList.add(customer2);
-			customerList.add(customer3);
-			customerList.add(customer4);
+		   
+			customerList.add(new Users("sawalha.saleh73@gmail.com","Jood","1234","0565589736","Nablus"));
+			customerList.add(new Users("surahamdallah@gmail.com","Sura","1234","0565589736","Ramallah"));
+			customerList.add(new Users("baraahamdallah@gmail.com","Baraa","1234","0565589786","Jenin"));
+			customerList.add(new Users("nabeel@gmail.com","Nabeel", "1234","0565785713","Tulkarm"));
+			customerList.add(new Users("aya@gmail.com","Aya","1234","0565589786","Ramallah"));
+			customerList.add(new Users("mohammadhamdallah@gmail.com","Mohammad", "1234","0565785713","Tulkarm"));
 	}
 	 
 	 public Customer() {
@@ -72,7 +63,7 @@ public class Customer {
 	     break;
 	     case 2:
 	     productsManager.listProducts();
-	     PrintUtils.println("Do you want to buy anything? (enter yes/no)");
+	     PrintUtils.println();
 	     scanner.nextLine();
 	     String y=scanner.nextLine();
 	     if(y.equals("yes")) {
@@ -92,7 +83,7 @@ public class Customer {
 		 scanner.nextLine();
 		 searchKeyword = scanner.nextLine().toLowerCase();	 
 		 if(searchProducts(searchKeyword)) {
-		  PrintUtils.println("Do you want to buy anything? (enter yes/no)");
+		  PrintUtils.println(QUESTION);
 		  String option=scanner.nextLine();
 		  if(option.equals("yes")) {
 		  takeProductInfo(currentEmail);
@@ -110,7 +101,7 @@ public class Customer {
 	     maxPrice = scanner.nextDouble();	 
 	     if(searchProductsByPriceRange(minPrice,maxPrice)) {
 	     scanner.nextLine();
-	     PrintUtils.println("Do you want to buy anything? (enter yes/no)");
+	     PrintUtils.println(QUESTION);
 		 String option=scanner.nextLine();
 		 if(option.equals("yes")) {
 		 takeProductInfo(currentEmail);
@@ -256,7 +247,7 @@ public class Customer {
 	   if(o.getCustomerEmail().equalsIgnoreCase(email)) {
 		   found=true;
 		   PrintUtils.println("---- Order History ----");
-		   for(Order p:o.getOrderList()) {
+		   for(Order p:OrderHistory.getOrderList()) {
 			   PrintUtils.println( "Product: " + p.getProductName() +
                " | Quantity: " + p.getQuantity()+
                " |  Cost: " + p.getCost()+"$"+
@@ -339,6 +330,8 @@ public class Customer {
 	 emptyCart();
 	 PrintUtils.println("All products in the cart has been deleted ");
 	 break;
+	 default:
+	  
 	 
 	 }
 	 }
@@ -483,7 +476,7 @@ public class Customer {
 	            return;
 	           }
 	       }
-	       PrintUtils.println("Wrong input");
+	       PrintUtils.println(WRONG);
 	    }
 	 
 	 public  void updatePass(String email,String oldpass,String newPass) {
@@ -495,7 +488,7 @@ public class Customer {
 	            return;
 	           }
 	       }
-	       PrintUtils.println("Wrong input");
+	       PrintUtils.println( WRONG);
 	   }
 	   
 	 public  void updatePhonenumber(String email, String newPhonenumber) {
@@ -507,7 +500,7 @@ public class Customer {
 	            return;
 	           }
 	       }
-	       PrintUtils.println("Wrong input");
+	       PrintUtils.println( WRONG);
 	   }
 	   
 	 public  void updateAddress(String email, String newAddress) {
@@ -519,7 +512,7 @@ public class Customer {
 	           return;
 	           }
 	       }
-	       PrintUtils.println("Wrong input");
+	       PrintUtils.println( WRONG);
 	   }
 	  
 	 
@@ -528,32 +521,32 @@ public class Customer {
 	PrintUtils.println("-----------------------------------------------------");	
 	PrintUtils.println("\nCustomers List");
 	for (Users i : customerList) {
-		System.out.println("Customer Email: " + i.getEmail());
-        System.out.println("Customer Name: " + i.getName());
-        System.out.println("Customer Phone number: " + i.getPhoneNumber());
-        System.out.println("Customer Address: " + i.getAddress());
-        System.out.println();
-        System.out.println("*******");
+		PrintUtils.println("Customer Email: " + i.getEmail());
+		PrintUtils.println("Customer Name: " + i.getName());
+		PrintUtils.println("Customer Phone number: " + i.getPhoneNumber());
+		PrintUtils.println("Customer Address: " + i.getAddress());
+		PrintUtils.println();
+		PrintUtils.println("*******");
 	}
 	PrintUtils.println("-----------------------------------------------------");
 	}
 	 
 	 //delete account for admin
 	 public void deleteAccount(String email) {
-	 boolean found=false;
+	
 	 Iterator<Users> listIterator = customerList.iterator();
 	 while (listIterator.hasNext()) {
 	 Users customer = listIterator.next();
 	 if (customer.getEmail().equalsIgnoreCase(email)) {
 		 listIterator.remove();  // Use iterator's remove method to avoid ConcurrentModificationException
 	 PrintUtils.println("Customer deleted successfully.");
-	 found = true;
+	  
 	  return;
 	       }
 	  }
-	 if(!found) {
+	
 	   PrintUtils.println("Customer email cannot be found"); 
-	   }	
+	   	
 	}
 	 
 	  public static Appointment  getAppointment(int num) {
@@ -578,6 +571,8 @@ public class Customer {
 		    return appointmentBoooking;
 	  }
 	  
+	  
+	 
 	  
 	 public static void setCurrent(String email) {
 	 currentEmail=email;	 

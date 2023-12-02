@@ -14,14 +14,14 @@ import usermanagement.Users;
 
 public class LogoutT {
 	LoginLogout obj;
-	 Admin admin;
+	 
 	 Customer customer;
 	 Installer installer;
 	 private List<Users> userList;	
 	 private String email,password;
 	 public LogoutT() {
 	 this.obj=new LoginLogout();
-	 this.admin=new Admin();  
+	
      this.customer=new Customer();
 	 this.installer=new Installer();
     }
@@ -29,7 +29,7 @@ public class LogoutT {
 	public void thatTheAdminIsLoggedInWithEmailAndPassword(String email, String password) {
 	   this.email=email;
 	   this.password=password;
-	   this.userList=admin.getList();
+	   this.userList=Admin.getList();
 	   obj.login(email, password, userList);
 	   assertTrue(obj.getIsLogged());
 	}
@@ -44,7 +44,7 @@ public class LogoutT {
 	public void thatTheCustomerIsLoggedInWithEmailAndPassword(String email, String password) {
 	 this.email=email;
      this.password=password;
-	 this.userList=customer.getList();
+	 this.userList=Customer.getList();
 	 obj.login(email, password, userList);
 	 assertTrue(obj.getIsLogged());
 	}
@@ -59,7 +59,7 @@ public class LogoutT {
 	public void thatTheInstallerIsLoggedInWithEmailAndPassword(String email, String password) {
 	 this.email=email;
 	 this.password=password;
-	 this.userList=installer.getList();
+	 this.userList=Installer.getList();
 	 obj.login(email, password, userList);
 		   assertTrue(obj.getIsLogged());
 	}

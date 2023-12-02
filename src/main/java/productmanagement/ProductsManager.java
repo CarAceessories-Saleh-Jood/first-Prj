@@ -28,7 +28,7 @@ public class ProductsManager {
     }
     
     
-    public ArrayList<Product> getProductList(){
+    public List<Product> getProductList(){
         return productList;
     }
      
@@ -65,16 +65,19 @@ public class ProductsManager {
     }
     
     public void listProducts() {
+    	String url="http://127.0.0.1:5500/ph.html";
     	 PrintUtils.println("-----------------------------------------------------");
     	for (Product product : productList) {
-            System.out.println("Product Name: " + product.getName());
-            System.out.println("Product Description: " + product.getDescription());
-            System.out.println("Product Cost: " + product.getCost()+"$");
-            System.out.println("Product Quantity: " + product.getQuantity());
-            System.out.println("Product Availability: " +(product.isAvailable()?"In stock":"Out of stock"));
-            System.out.println("Product Category: " + product.getCategory());
-            System.out.println();
+    		PrintUtils.println("Product Name: " + product.getName());
+            PrintUtils.println("Product Description: " + product.getDescription());
+            PrintUtils.println("Product Cost: " + product.getCost()+"$");
+            PrintUtils.println("Product Quantity: " + product.getQuantity());
+            PrintUtils.println("Product Availability: " +(product.isAvailable()?"In stock":"Out of stock"));
+            PrintUtils.println("Product Category: " + product.getCategory());
+            PrintUtils.println();
         }
+    	
+    	 PrintUtils.println("Copy this url and paste in your browser to see the products: "+ url);
     	 PrintUtils.println("-----------------------------------------------------");
     }
 	 
@@ -143,20 +146,20 @@ public class ProductsManager {
   }
   
   public void deleteProduct(String name) {
-	  boolean found=false;
+	
 	   Iterator<Product> productIterator = productList.iterator();
 	    while (productIterator.hasNext()) {
 	        Product prod = productIterator.next();
 	        if (prod.getName().equalsIgnoreCase(name)) {
 	        	productIterator.remove();  
 	            PrintUtils.println("Product deleted successfully.");
-	            found = true;
+	            
 	            return;
 	        }
 	    }
-	     if(!found) {
+	    
 	    	 PrintUtils.println("Product cannot be found"); 
-	     }
+	    
      }
   
   public Product getProduct(String productName) {

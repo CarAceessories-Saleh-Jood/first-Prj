@@ -4,6 +4,8 @@ import static org.junit.Assert.assertFalse;
 
 
 import java.util.ArrayList;
+import java.util.List;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import productmanagement.CategoriesManager;
@@ -15,8 +17,8 @@ public class ManageCategoriesT {
 	private String categoryName,categoryDescription,newName,newDescription;
 	private CategoriesManager obj;
 	private ProductsManager obj1;
-	private ArrayList<Category> categoryList;
-	private ArrayList<Product> productList;
+	private List<Category> categoryList;
+	private List<Product> productList;
 	
 	public ManageCategoriesT() {
 		this.obj=new CategoriesManager();
