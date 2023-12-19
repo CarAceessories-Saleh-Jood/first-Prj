@@ -23,7 +23,7 @@ public class Admin{
     
     public static void adminTasks() {
     	
-        while(true) {
+    while(true) {
     Printlists.adminTasks();	
    	int choice = scanner.nextInt();
     if(choice==5) {

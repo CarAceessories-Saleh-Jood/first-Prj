@@ -9,7 +9,7 @@ import usermanagement.*;
 
 public class Main {
 	
-	private static String Email;
+	private static String email1;
 	private static final String ENTER_EMAIL = "Enter your email: ";
 	private static final String ENTER_PASS = "Enter your password: ";
 	private static final String THANK_MSG = "Thank you for using our system. Goodbye!";
@@ -26,13 +26,14 @@ public class Main {
     	Scanner scan = new Scanner(System.in);	
 		LoginLogout log = new LoginLogout();
 		 while (true) {
+			 
 		 PrintUtils.println(ENTER_EMAIL);
 		 String email = scan.nextLine();
 		 PrintUtils.println(ENTER_PASS);
 		 String password = scan.nextLine();
 		 if (log.login(email, password, userList)) {
 		 PrintUtils.println("Login succeeded");
-		 Email=email;
+		 email1=email;
 		 break; 
 		 }
 		 else 
@@ -62,7 +63,7 @@ public class Main {
         PrintUtils.println("Enter your email again: ");
         email = scan.nextLine();
         }
-         Email=email;
+         email1=email;
          PrintUtils.println(ENTER_PASS);
          String password = scan.nextLine();
          PrintUtils.println("Enter your name: ");
@@ -112,14 +113,14 @@ public class Main {
        }
     }
      
-     if(Type==2){ //Installer
+     else if(Type==2){ //Installer
      Printlists.printLogin();
      int num=scan.nextInt();
      if(num==1) {
      userList =Installer.getList();
      setlist(userList);
      printLoginInfo();
-     Installer.setCurrent(Email);
+     Installer.setCurrent(email1);
      Installer.installerTasks();
      }
      else if(num==2) {
@@ -133,20 +134,21 @@ public class Main {
      }
      
      
-     if(Type==3) {  //Customer
+     else if(Type==3) {  //Customer
+    Customer c=new Customer(); 
      userList =Customer.getList(); 	 
      setlist(userList);
      Printlists.printLoginorsignup();
      int num=scan.nextInt();
      if(num==1) {
      printSignUpInfo();	
-     Customer.setCurrent(Email);
-     Customer.customerServices();
+     Customer.setCurrent(email1);
+     c.customerServices();
      }
      else if(num==2) {
      printLoginInfo();
-     Customer.setCurrent(Email);
-     Customer.customerServices();
+     Customer.setCurrent(email1);
+     c.customerServices();
      }
      else if(num==3) {
      PrintUtils.println(THANK_MSG);
@@ -160,11 +162,11 @@ public class Main {
      
      
      
-     if(Type==4){
+     else if(Type==4){
          PrintUtils.println(THANK_MSG);
          System.exit(1);
      }
-     if (Type!=1 && Type!=2 && Type!=3 &&Type!=4) {
+     else if(Type!=1 && Type!=2 && Type!=3 &&Type!=4) {
   	   PrintUtils.println(NOT_AVAILABLE);
         
      }

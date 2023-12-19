@@ -10,10 +10,9 @@ public class CustomerServicesT {
 	LoginLogout log;
 	ProductsManager product;
 	Customer customer;
-	Appointment app;
+	Appointment appointment;
 	
-	private String productName,email1,email2,searchword,name,phonenumber,carbrand,carmodel,reason;
-	private int appointmentNumber;
+	private String productName,email1,searchword,name,phonenumber,carbrand,carmodel,reason;
 	private double cost,minprice,maxprice;
 	private int quantity;
 	
@@ -21,6 +20,7 @@ public class CustomerServicesT {
 	this.log=new LoginLogout();	
 	this.product=new ProductsManager();	
 	this.customer=new Customer();	
+	this.appointment=new Appointment();
 		
 	}
 	@Given("that customer is logged in with email {string}")
@@ -42,18 +42,18 @@ public class CustomerServicesT {
 	}
 	@Then("the the product will be added to the cart")
 	public void theTheProductWillBeAddedToTheCart() {
-		  Customer.addToCart(productName, cost, quantity);
+		customer.addToCart(productName, cost, quantity);
 	}
 
 
 	@Then("when he confirms to buy")
 	public void whenHeConfirmsToBuy() {
-	    Customer.confirmOrder(email1);
+		customer.confirmOrder(email1);
 	}
 
 	@Then("a confirmation email will be sent successfully")
 	public void aConfirmationEmailWillBeSentSuccessfully() {
-		   Customer.sendOrderConfirmationEmail(email1);
+		customer.sendOrderConfirmationEmail(email1);
 	}
 
 	@Given("he enters {string} to search for a product")
@@ -63,13 +63,13 @@ public class CustomerServicesT {
 
 	@Then("the products of this word will be found")
 	public void theProductWillBeFoundAndPrinted() {
-	     assertTrue(Customer.searchProducts(searchword));
+	     assertTrue(customer.searchProducts(searchword));
 	}
 
 
 	@Then("the products of this word will not be found")
 	public void theProductsOfThisWordWillNotBeFound() {
-		 assertFalse(Customer.searchProducts(searchword));
+		 assertFalse(customer.searchProducts(searchword));
 		}
 
 	@Given("he enters {double} and {double} to search for a product")
@@ -80,13 +80,13 @@ public class CustomerServicesT {
 
 	@Then("the products of this price will be found")
 	public void theProductWillBeFound() {
-		   assertTrue(Customer.searchProductsByPriceRange(minprice, maxprice));
+		   assertTrue(customer.searchProductsByPriceRange(minprice, maxprice));
 		}
 
 
 	@Then("the products of this price will not be found")
 	public void theProductsOfThisPriceWillNotBeFound() {
-		assertFalse(Customer.searchProductsByPriceRange(minprice, maxprice));
+		assertFalse(customer.searchProductsByPriceRange(minprice, maxprice));
 	}
 
 	@Given("that customer is logged in with email {string} and he wants to see the order history")
@@ -96,7 +96,7 @@ public class CustomerServicesT {
 
 	@Then("his order history will be printed")
 	public void hisOrderHistoryWillBePrinted() {
-	   assertTrue(Customer.viewOrderHistory(email1));
+	   assertTrue(customer.viewOrderHistory(email1));
 	}
 
 	@Given("that customer is logged in with email {string} and he wants to request an installation service")
@@ -131,16 +131,14 @@ public class CustomerServicesT {
 
 	@Given("he chooses the appointment number {int} with the installer {string}")
 	public void heChoosesTheAppointmentNumberWithTheInstaller(int number, String email2) {
-	  this.appointmentNumber=number;
-	  this.email2=email2;
-	  this.app=Customer.getAppointment(number);
+	  this.appointment=Customer.getAppointment(number);
 	  
 	  
 	}
 
 	@Then("installation request will be sent")
 	public void installationRequestWillBeSent() {
-		  Customer.requestInstallation(app, email1, name, phonenumber, reason, carbrand, carmodel);
+		  Customer.requestInstallation(appointment, email1, name, phonenumber, reason, carbrand, carmodel);
 		  Customer.sendInstallationRequestEmail(email1);
 		}
 

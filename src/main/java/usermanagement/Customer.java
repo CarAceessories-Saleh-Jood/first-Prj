@@ -3,7 +3,6 @@ package usermanagement;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 import productmanagement.Product;
@@ -17,9 +16,9 @@ private static final String QUESTION="Do you want to buy anything? (enter yes/no
 private static final String WRONG="Wrong input";
 
  private static String currentEmail;	
- private static List<Users> customerList = new ArrayList<>();
- private static List<Order> customerCart=new ArrayList<>();
- private static List<OrderHistory> orderHistory=new ArrayList<>();
+ private static  List<Users> customerList = new ArrayList<>();
+ private  List<Order> customerCart=new ArrayList<>();
+ private  List<OrderHistory> orderHistory=new ArrayList<>();
  private static List<AppointmentBooking> appointmentBoooking=new ArrayList<>();
 
  
@@ -39,7 +38,7 @@ private static final String WRONG="Wrong input";
 	 }
 	
 	
-	 public static void customerServices() {
+	 public   void customerServices() {
 		ProductsManager productsManager = new ProductsManager();
 	    Scanner scanner = new Scanner(System.in);
    	   
@@ -63,7 +62,8 @@ private static final String WRONG="Wrong input";
 	     break;
 	     case 2:
 	     productsManager.listProducts();
-	     PrintUtils.println();
+	     PrintUtils.println(QUESTION);
+	     
 	     scanner.nextLine();
 	     String y=scanner.nextLine();
 	     if(y.equals("yes")) {
@@ -241,13 +241,14 @@ private static final String WRONG="Wrong input";
 	}
 	
 	
-	public static boolean viewOrderHistory(String email) {
-	 boolean found=false;
+	public  boolean viewOrderHistory(String email) {
+	
+	boolean found=false;
     for(OrderHistory o:orderHistory) {
 	   if(o.getCustomerEmail().equalsIgnoreCase(email)) {
 		   found=true;
 		   PrintUtils.println("---- Order History ----");
-		   for(Order p:OrderHistory.getOrderList()) {
+		   for(Order p:o.getOrderList()) {
 			   PrintUtils.println( "Product: " + p.getProductName() +
                " | Quantity: " + p.getQuantity()+
                " |  Cost: " + p.getCost()+"$"+
@@ -266,7 +267,7 @@ private static final String WRONG="Wrong input";
      return found;
 	}
     
-	 public static boolean searchProducts( String searchKeyword) {
+	 public  boolean searchProducts( String searchKeyword) {
 	        ProductsManager productsManager=new ProductsManager();
              ArrayList<Product> matchingProducts = new ArrayList<>();
 			for (Product product : productsManager.getProductList()) {
@@ -288,7 +289,7 @@ private static final String WRONG="Wrong input";
 	       return true;   
 	    }
 	    
-	 public static boolean searchProductsByPriceRange(double minPrice, double maxPrice) {
+	 public  boolean searchProductsByPriceRange(double minPrice, double maxPrice) {
 		    ProductsManager productsManager = new ProductsManager();
 		    ArrayList<Product> matchingProducts = new ArrayList<>();
 
@@ -316,7 +317,7 @@ private static final String WRONG="Wrong input";
 	 
 	 
 	 
-	 public static void confirmOrDelete(String email) {
+	 public void confirmOrDelete(String email) {
 	 Scanner scanner = new Scanner(System.in);
      PrintUtils.println("Enter your choice: ");	
      Printlists.confirmOrDelete();
@@ -336,12 +337,11 @@ private static final String WRONG="Wrong input";
 	 }
 	 }
 
-	public static void emptyCart() {
-	customerCart.clear();
-	}
+	public void emptyCart() {
+		customerCart.clear();
 
-	
-	public static void takeProductInfo(String email) {
+	}
+	public  void takeProductInfo(String email) {
 	 while(true) {
 	 ProductsManager productsManager = new ProductsManager(); 
 	 Scanner scanner = new Scanner(System.in);
@@ -374,23 +374,31 @@ private static final String WRONG="Wrong input";
    }
 }
 
-	public static void addToCart(String productName,double cost,int quantity ) {
+	public void addToCart(String productName,double cost,int quantity ) {
 		 double subtotal=cost*quantity;	
 		 customerCart.add(new Order(productName,cost,quantity,subtotal));
 		 PrintUtils.println("Product added successfully to your shopping cart"+"\nProduct Name: "+productName+"\nProduct cost: "+cost+"$"+"\nProduct quantity: "+quantity+"\nSubtotal: "+subtotal+"$" );
 	}
    
-	public static void confirmOrder(String email) {
+	public void confirmOrder(String email) {
 		 double total=0;
-		  for(Order o:customerCart) {
-	        	total+=o.getSubtotal();
-	      }
-		orderHistory.add(new OrderHistory(customerCart,email,total));
+		 
+		  List<Order> cartCopy = new ArrayList<>(customerCart);
+		    
+		  // Calculate the total
+		  for (Order o : cartCopy) {
+	      total += o.getSubtotal();
+		  }
+
+	     // Add the copy to orderHistory
+		 orderHistory.add(new OrderHistory(cartCopy, email, total));
+	
+		 customerCart.clear();
 		PrintUtils.println("Order confirmed successfully");
 		PrintUtils.println("Total cost= "+total+"$");
 		ProductsManager prod=new ProductsManager();
 		   for (Product i : prod.getProductList()) {
-		        for(Order o:customerCart) {
+		        for(Order o:cartCopy) {
 		        	if(i.getName().equals(o.getProductName())) {
 		        		i.setQuantity(i.getQuantity()-o.getQuantity());
 		        	}
@@ -398,7 +406,7 @@ private static final String WRONG="Wrong input";
 		      }
 		}
 
-	public static void sendOrderConfirmationEmail(String customerEmail) {
+	public void sendOrderConfirmationEmail(String customerEmail) {
 	      // Replace the following placeholders with your actual email sending logic
         String subject = "Order Confirmation";
         StringBuilder body = new StringBuilder("Thank you for your order! Your order has been placed successfully.\nOrder details:");
@@ -517,7 +525,7 @@ private static final String WRONG="Wrong input";
 	  
 	 
 	 //list accounts for admin
-	public static  void printAccounts() {
+	public static void printAccounts() {
 	PrintUtils.println("-----------------------------------------------------");	
 	PrintUtils.println("\nCustomers List");
 	for (Users i : customerList) {
@@ -559,12 +567,12 @@ private static final String WRONG="Wrong input";
 		  
 	  }
 	  
-	  public static  List<Users> getList(){
+	  public static List<Users> getList(){
 	       return customerList;
 	  }
 	 
-	  public static  List<OrderHistory> getOrderList(){
-		    return orderHistory;
+	  public  List<OrderHistory> getOrderList(){
+		    return this.orderHistory;
 	  }
        
 	  public static  List<AppointmentBooking> getBookingList(){

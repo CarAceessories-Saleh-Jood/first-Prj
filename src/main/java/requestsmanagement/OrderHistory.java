@@ -1,12 +1,13 @@
 package requestsmanagement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import usermanagement.Users;
 
 public class OrderHistory {
 
-private static  List<Order> orderList;
+private List<Order> orderList;
 private String customerEmail;
 private double total;
 
@@ -32,12 +33,12 @@ public void setCustomerEmail(String customerEmail) {
 	this.customerEmail = customerEmail;
 }
 
-public static List<Order> getOrderList() {
+public List<Order> getOrderList() {
 	return orderList;
 }
 
-public static void setOrderList(List<Order> orderList) {
-	OrderHistory.orderList = orderList;
+public void setOrderList(List<Order> customerCart) {
+	this.orderList = new ArrayList<>(customerCart);
 }
 
 
