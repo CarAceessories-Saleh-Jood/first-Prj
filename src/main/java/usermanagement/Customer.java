@@ -30,9 +30,7 @@ private static final String WRONG="Wrong input";
 			customerList.add(new User("mohammadhamdallah@gmail.com","Mohammad", "1234","0565785713","Tulkarm"));
 	}
 	 
-	 public Customer() {
-    // TODO document why this constructor is empty
-  }
+	
 	 
 	 
 	public boolean viewInstallationRequests(String currentEmail2) {
@@ -298,7 +296,7 @@ private static final String WRONG="Wrong input";
 		PrintUtils.println();
 		PrintUtils.println("*******");
 	}
-	PrintUtils.println("-----------------------------------------------------");
+	PrintUtils.println("----------------------------------------------------");
 	}
 	 
 	 //delete account for admin

@@ -18,7 +18,7 @@ public class CategoriesManager {
 	    categoryList.add(new Category("Audio", "Sound products and accessories."));
 	    categoryList.add(new Category("Electronics", " Diverse electronic devices."));
 	    categoryList.add(new Category("Body parts", "External vehicle components."));
-	    categoryList.add(new Category("Brakes", "Products for vehicle braking."));
+        categoryList.add(new Category("Brakes", "Products for vehicle braking."));
 	    categoryList.add(new Category("Automative Tools", "Tools for automotive tasks."));
  }
 

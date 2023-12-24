@@ -2,13 +2,13 @@ package usermanagement;
 
 import java.util.List;
 
+import productmanagement.ProductsManager;
 import userinterface.PrintUtils;
 
 public class LoginLogout {
 
-	public LoginLogout() {
-   // TODO document why this constructor is empty
- }
+	
+
 	
 private boolean isLogged=false;
 

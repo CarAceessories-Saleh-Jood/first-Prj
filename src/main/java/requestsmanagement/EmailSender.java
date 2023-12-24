@@ -44,7 +44,7 @@ public class EmailSender {
 	            PrintUtils.println("Email confirmation sent successfully!");
 
 	        } catch (MessagingException e) {
-	        	 throw new RuntimeException(e);
+	        	 PrintUtils.println(" Wrong connection ");
 	        }
 	    }
 	}

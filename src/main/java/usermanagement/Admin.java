@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import productmanagement.ProductsManager;
 import requestsmanagement.AppointmentBooking;
 import userinterface.PrintUtils;
 
@@ -15,10 +16,7 @@ public class Admin{
 	adminList.add(new User("sawalha.saleh3@gmail.com","Saleh Sawalha", "1234","0565785656","Nablus"));
 	}
 	
-	public Admin() {
-   // TODO document why this constructor is empty
- }
-	
+
 	public void viewCustomerInfo() {
         Customer.printAccounts();
     }

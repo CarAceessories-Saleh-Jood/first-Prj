@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+
+import productmanagement.ProductsManager;
 import requestsmanagement.Appointment;
 import requestsmanagement.AppointmentBooking;
 
@@ -27,9 +29,7 @@ public class Installer {
    
 	}
 	  
-	  public Installer() {
-     // TODO document why this constructor is empty
-   }
+	
 
 	
 	  public void deleteAppointmentByNumber(int number) {
@@ -117,7 +117,7 @@ public class Installer {
 	}
 	 
 		public static void printAccounts() {
-			PrintUtils.println("-----------------------------------------------------");	
+			PrintUtils.println("----------------------------------------------------");	
 			PrintUtils.println("\nInstallers List");
 			for (User i : installerList) {
 				

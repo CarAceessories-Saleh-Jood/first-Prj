@@ -27,7 +27,7 @@ public class Product{
 
     public void setName(String name) {
         this.name = name;
-    }
+   }
 
     public double getCost() {
         return cost;

@@ -19,7 +19,7 @@ public class AppointmentBooking{
 	        this.reason = reason;
 	        this.carBrand=carBrand;
 	        this.carModel=carModel;
-	        }
+	       }
 
 	    @Override
 	    public String toString() {

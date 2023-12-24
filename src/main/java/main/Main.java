@@ -691,7 +691,7 @@ public class Main {
 		                PrintUtils.println("Sorry, the appointment is already booked. Choose another appointment or wait until we add new dates.");
 		                return false;
 		            } else {
-		                selectedAppointment = customer.getAppointment(appointmentNumber);
+		                selectedAppointment = Customer.getAppointment(appointmentNumber);
 		             
 		                break;
 		            }

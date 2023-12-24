@@ -7,8 +7,8 @@ import java.util.regex.Pattern;
 public class SignUp {
 	
 	private boolean isRegistered=false;
-	
-	private static final String EMAIL_REGEX = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,6}$";
+	 
+	private static final String EMAIL_REGEX = "^[\\p{Alnum}._%+-]+@[\\p{Alnum}.-]+\\.[\\p{Alpha}]{2,6}$";
 	private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
 	private List<User> customerList;
 
