@@ -6,8 +6,10 @@ import java.io.PrintWriter;
 
 public class PrintUtils {
    
-
-    private static final PrintWriter writer = new PrintWriter(System.out, true);
+	private PrintUtils(){
+		
+	}
+   private static final PrintWriter writer = new PrintWriter(System.out, true);
 
     public static void println(String message) {
         print(message);

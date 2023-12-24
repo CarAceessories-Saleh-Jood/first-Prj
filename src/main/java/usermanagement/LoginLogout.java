@@ -12,9 +12,9 @@ public class LoginLogout {
 private boolean isLogged=false;
 
 
-   public boolean login(String Email, String password, List<User> userList) {
+   public boolean login(String email, String password, List<User> userList) {
 	   for (User i : userList) {
-	   if (i.getEmail().equalsIgnoreCase(Email)&& i.getPassword().equals(password)){
+	   if (i.getEmail().equalsIgnoreCase(email)&& i.getPassword().equals(password)){
 		
 	    isLogged=true; 
 	    }
