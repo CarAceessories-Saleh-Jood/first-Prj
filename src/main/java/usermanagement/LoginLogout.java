@@ -2,7 +2,6 @@ package usermanagement;
 
 import java.util.List;
 
-import productmanagement.ProductsManager;
 import userinterface.PrintUtils;
 
 public class LoginLogout {

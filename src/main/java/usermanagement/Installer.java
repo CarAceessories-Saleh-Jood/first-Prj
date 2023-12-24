@@ -4,12 +4,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-import productmanagement.ProductsManager;
 import requestsmanagement.Appointment;
 import requestsmanagement.AppointmentBooking;
 
 import userinterface.PrintUtils;
-import userinterface.Printlists;
 
 public class Installer {
 	 

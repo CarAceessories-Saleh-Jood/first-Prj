@@ -3,8 +3,6 @@ package usermanagement;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Scanner;
-
 import productmanagement.Product;
 import productmanagement.ProductsManager;
 import requestsmanagement.*;

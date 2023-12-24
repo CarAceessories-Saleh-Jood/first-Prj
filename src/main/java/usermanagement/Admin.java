@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import productmanagement.ProductsManager;
 import requestsmanagement.AppointmentBooking;
 import userinterface.PrintUtils;
 
